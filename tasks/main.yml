@@ -1,2 +1,26 @@
 ---
-# tasks file for template
+# tasks file for install Jupyter
+- include_tasks: variables.yml
+
+- include_tasks: OS-Family-RedHat.yml
+  when: ansible_os_family == "RedHat"
+
+- include_tasks: OS-Family-Debian.yml
+  when: ansible_os_family == "Debian"
+
+- name: Install Jupyter Notebook
+  pip:
+    name:
+      - jupyter
+    executable: pip3
+    state: forcereinstall
+  vars:
+    ansible_python_interpreter: /usr/bin/python3
+
+- name: Add Entrypoint files
+  copy:
+    src: "{{ item }}"
+    dest: /entrypoint/
+  with_fileglob:
+    - "*.py"
+  when: {{ docker_image|upper }} == "T"

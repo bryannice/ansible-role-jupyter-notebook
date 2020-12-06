@@ -21,6 +21,6 @@
   copy:
     src: "{{ item }}"
     dest: /entrypoint/
+  when: build_docker_image|upper == "T"
   with_fileglob:
     - "*.py"
-  when: "{{ build_docker_image|upper }}" = "T"

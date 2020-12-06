@@ -23,4 +23,4 @@
     dest: /entrypoint/
   with_fileglob:
     - "*.py"
-  when: "{{ docker_image|upper }}" == "T"
+  when: "{{ build_docker_image|upper }}" = "T"

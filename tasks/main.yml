@@ -16,11 +16,3 @@
     state: forcereinstall
   vars:
     ansible_python_interpreter: /usr/bin/python3
-
-- name: Add Entrypoint files
-  copy:
-    src: "{{ item }}"
-    dest: /entrypoint/
-  when: build_docker_image|upper == "T"
-  with_fileglob:
-    - "*.py"

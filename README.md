@@ -1,61 +1,56 @@
-# template-ansible-role
+Ansible Role Jupyter Notebook
+=========
 
-This repository is a template repository.
+This role builds Jupyter Notebook for Debian, and RedHat OS families. It can be applied for container images, virtual machine images, or directly against a host.
 
-## Files
+ToDo's
+---------------
 
-Template files:
+1. Add logic for Alpine OS family
 
-1. .github/
-    1. ISSUE\_TEMPLATE/
-        1. [bug\_report.md](#githubissue_templatebug_reportmd)
-        1. [feature\_request.md](#githubissue_templatefeature_requestmd)
-1. [LICENSE](#license)
-1. [PULL\_REQUEST\_TEMPLATE.md](#pull_request_templatemd)
-1. [README.md](#readmemd)
+1. Testing configuration created to use Molecule.
 
-## PULL\_REQUEST\_TEMPLATE.md
+Dependencies
+------------
 
-The `PULL_REQUEST_TEMPLATE.md` file asks a pull requester for information about the pull request.
+None identified at this time.
 
-The [PULL_REQUEST_TEMPLATE.md](PULL_REQUEST_TEMPLATE.md) file in this repository
-is an example that can be modified.
+Example Playbook
+----------------
 
-### How to create PULL\_REQUEST\_TEMPLATE.md
+```ansible
+- hosts: servers
+  roles:
+     - jupyter-notebook
+```
 
-1. Option #1: Using GitHub's "Wizard"
-    1. [github.com](https://github.com/) > (choose repository) > Insights > Community > Pull request template > "Add" button
-1. Option #2: Manual file creation
-    1. See GitHub's [Creating a pull request template for your repository](https://help.github.com/articles/creating-a-pull-request-template-for-your-repository/)
+Testing Role
+----------------
 
-## .github/ISSUE\_TEMPLATE/bug\_report.md
+The ansible molecule container needs to mount the host machine's /var/run/docker.sock to have the ability to spawn another container representing the environment to unit test the role in. Once the environment container is running, then the molecule container will connect to the test environment container to run the test ansible playbook.
 
-A template presented to the Contributor when creating an issue that reports a bug.
+![](assets/ansible_role_unit_testing.png)
 
-The [bug_report.md](.github/ISSUE_TEMPLATE/bug_report.md) file in this repository
-is an example that can be modified.
+Example docker command to run molecule:
 
-### How to create .github/ISSUE\_TEMPLATE/bug\_report.md
+```ansible
+docker run --rm -it \
+    --env MOLECULE_NO_LOG="false" \
+    -v "$(pwd)":/tmp/$(basename "${PWD}"):ro \
+    -v /var/run/docker.sock:/var/run/docker.sock \
+    -v ~/.ssh:/root/.ssh \
+    -w /tmp/$(basename "${PWD}") \
+    quay.io/ansible/molecule:3.0.4 \
+    molecule test
+```
 
-1. Option #1: Using GitHub's "Wizard"
-    1. [github.com](https://github.com/) > (choose repository) > Insights > Community > Issue templates > "Add" button > Add template: Bug report
-
-## .github/ISSUE\_TEMPLATE/feature\_request.md
-
-A template presented to the Contributor when creating an issue that requests a feature.
-
-The [feature_request.md](.github/ISSUE_TEMPLATE/feature_request.md) file in this repository
-is an example that can be modified.
-
-### How to create .github/ISSUE\_TEMPLATE/feature\_request.md
-
-1. Option #1: Using GitHub's "Wizard"
-    1. [github.com](https://github.com/) > (choose repository) > Insights > Community > Issue templates > "Add" button > Add template: Feature request
-
-## License
+License
+-------
 
 [GPLv3](LICENSE)
 
-## References
+References
+----------
 
-* [Markdownlint](https://dlaa.me/markdownlint/)
+- [Yamllint](https://yamllint.readthedocs.io/en/latest/)
+- [Molecule Docker Configuration](https://molecule.readthedocs.io/en/2.22/configuration.html#docker)

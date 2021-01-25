@@ -1,6 +1,0 @@
----
-- name: Install Python3 Apt module
-  package:
-    name:
-      - python3-apt
-    state: present

@@ -1,7 +1,0 @@
----
-- name: Install Python3 and Pip3 if does not exists
-  apt:
-    name:
-      - python3-pip
-    state: absent
-  when: "'python3-pip' not in required_packages_check.ansible_facts.packages"

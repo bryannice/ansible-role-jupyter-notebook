@@ -1,8 +1,0 @@
----
-# Prep environment with requirements
-- name: Install Python3 and Pip3 if does not exists
-  yum:
-    name:
-      - python3-pip
-    state: present
-  when: "'python3-pip' not in required_packages_check.ansible_facts.packages"

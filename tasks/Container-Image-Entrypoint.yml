@@ -6,10 +6,9 @@
     state: directory
 
 - name: Copy entrypoint files
-  ansible.builtin.file:
+  ansible.builtin.copy:
     mode: 0777
     path: /entrypoint/
     src: "{{ item }}"
-    state: file
   with_fileglob:
     - entrypoint/*py

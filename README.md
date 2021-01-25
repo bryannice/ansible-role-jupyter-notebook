@@ -10,6 +10,15 @@ ToDo's
 
 1. Testing configuration created to use Molecule.
 
+Role Variables
+----------------
+
+Ansible variable is listed below, along with defualt value (see defaults/main.yml):
+
+```ansible
+container_iamge_builder: false
+```
+
 Dependencies
 ------------
 

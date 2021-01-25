@@ -1,2 +1,3 @@
 ---
 # defaults file for template
+container_iamge_builder: false

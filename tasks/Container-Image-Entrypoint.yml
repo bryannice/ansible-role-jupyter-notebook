@@ -1,0 +1,15 @@
+---
+- name: Create entrypoint directory
+  ansible.builtin.file:
+    mode: 0777
+    path: /entrypoint
+    state: directory
+
+- name: Copy entrypoint files
+  ansible.builtin.file:
+    mode: 0777
+    path: /entrypoint/
+    src: "{{ item }}"
+    state: file
+  with_fileglob:
+    - entrypoint/*py

@@ -1,5 +1,8 @@
 ---
 # tasks file for install Jupyter
+- include_tasks: OS-Family-Debian.yml
+  when: ansible_os_family == "Debian"
+
 - name: Install Python3 and Pip3 if does not exists
   package:
     name:

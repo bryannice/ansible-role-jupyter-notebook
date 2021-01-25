@@ -8,7 +8,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [1.2.0] - 2021-01-24
 
-### Added to 1.1.1
+### Added to 1.2.0
 
 - Simplifying logic leveraging new features in Ansible 2.10
 
